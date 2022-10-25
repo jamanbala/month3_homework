@@ -20,7 +20,8 @@ async def quiz_2(call: types.CallbackQuery):
     ]
 
     await bot.send_poll(
-        chat_id=call.from_user.id,
+
+        chat_id=call.message.chat.id,
         question=question,
         options=answers,
         is_anonymous=False,
@@ -30,6 +31,30 @@ async def quiz_2(call: types.CallbackQuery):
         open_period=10,
         reply_markup=markup
     )
+
+
+async def quiz_3(call: types.CallbackQuery):
+    question = "Какое группа самое сильное?"
+    answers = [
+        "22-1",
+        "22-3",
+        "22-2"
+    ]
+
+    await bot.send_poll(
+        chat_id=call.message.chat.id,
+        question=question,
+        options=answers,
+        is_anonymous=False,
+        type='quiz',
+        correct_option_id=2,
+        explanation="Сам выбирай",
+        open_period=10
+    )
+
+def register_handlers_callback(dp: Dispatcher):
+    dp.register_callback_query_handler(quiz_2, lambda call: call.data == "button_call_1")
+    dp.register_callback_query_handler(quiz_3, lambda call: call.data == "button_call_2")
 
 
 async def complete_delete(call: types.CallbackQuery):
