@@ -2,7 +2,7 @@ from aiogram import types, Dispatcher
 from config import dp, bot
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.bot_db import sql_command_random
-
+from parser.jutsu import parser
 
 # @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
